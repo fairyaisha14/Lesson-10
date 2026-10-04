@@ -13,7 +13,7 @@ def display_image(title, image):
     plt.axis('off')
     plt.show()
 
-def interactive_egde_detection(image_path):
+def interactive_edge_detection(image_path):
     """Interactive activity for edge detection and filtering."""
     image = cv2.imread(image_path)
     if image is None:
@@ -53,3 +53,29 @@ def interactive_egde_detection(image_path):
             # Laplacian Edge Detection
             laplacian = cv2.Laplacian(gray_image, cv2.CV_64F)
             display_image("Laplacian Edge Detection", laplacian.astype(np.uint8))
+
+        elif choice == '4':
+            # Gaussian Smoothing
+            print("Adjust kernel size for Gaussian Blur (must be odd, default: 5)")
+            kernel_size = int(input("Enter kernel size (odd number): "))
+            blurred = cv2.GaussianBlur(image, (kernel_size, kernel_size), 0)
+            display_image("Gaussian Smoothing", blurred)
+
+        elif choice == '5':
+            # Median Filtering
+            print("Adjust kernel size for Median Filter (must be odd, default: 5)")
+            kernel_size = int(input("Enter kernel size (odd number): "))
+            median_filtered = cv2.medianBlur(image, kernel_size)
+            display_image("Median Filtering", median_filtered)
+
+        elif choice == '6':
+            # Exit
+            print("Exiting...")
+            break
+
+        else:
+            print("Invalid choice. Please select a number between 1 and 6.")
+
+
+# Provide the path to an image for the activity
+interactive_edge_detection("Cat.jpg")
